@@ -5,27 +5,35 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 function ToolBar(props) {
-  const { changeClass, changeFamily } = props;
+  const { changeAlign, changeFamily } = props;
 
   return (
-    <Box borderTop="1px solid #d1dede" borderBottom="1px solid #d1dede">
+    <Box
+      borderTop="1px solid #d1dede"
+      borderBottom="1px solid #d1dede"
+      className="toolbar"
+    >
       <Stack
         direction="row"
         alignItems="center"
         height="60px"
         backgroundColor="#e6f0f0"
+        className="toolbar-inner"
       >
-        <Typography width="120px" color="#525454" textAlign="center">
+        <Typography
+          width="120px"
+          color="#525454"
+          textAlign="center"
+          className="tool-text"
+        >
           Tool bar
         </Typography>
 
-        <Box>
-          <Box>
-            <ActionButtons
-              changeClass={changeClass}
-              changeFamily={changeFamily}
-            />
-          </Box>
+        <Box className="action-btn-container">
+          <ActionButtons
+            changeAlign={changeAlign}
+            changeFamily={changeFamily}
+          />
         </Box>
       </Stack>
     </Box>

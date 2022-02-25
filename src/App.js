@@ -1,4 +1,3 @@
-import "./App.css";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -34,20 +33,30 @@ function App() {
   });
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" className="app-container">
       <Stack
         direction="row"
         alignItems="center"
         justifyContent="space-between"
         height="70px"
+        padding="0px 7px"
       >
-        <Typography color="#001427" fontWeight="500" fontSize="28px">
+        <Typography
+          color="#001427"
+          fontWeight="500"
+          fontSize="28px"
+          className="logo"
+        >
           Word Editor
         </Typography>
 
         <Box>
-          <BootstrapButton variant="contained" disableRipple>
-            SAVE YOUR CHANGES
+          <BootstrapButton
+            variant="contained"
+            disableRipple
+            className="save-btn"
+          >
+            SAVE CHANGES
           </BootstrapButton>
         </Box>
       </Stack>

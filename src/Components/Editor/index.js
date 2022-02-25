@@ -7,14 +7,17 @@ class Editor extends React.Component {
   constructor() {
     super();
     this.state = {
-      texts: `<p>Start Editing</p>`,
+      texts: `<p></p>`,
       alignClass: "text-left",
       fontFamily: "roboto",
     };
   }
 
+  // update local storage while user types
   handleInputChange = (e) => {
-    this.setState({ texts: e.target.value });
+    const value = e.target.value;
+    this.setState({ texts: value });
+    localStorage.setItem("text_edits", JSON.stringify(value));
   };
 
   specifyTags = {
@@ -32,38 +35,69 @@ class Editor extends React.Component {
       "h5",
       "h6",
     ],
-    allowedAttributes: { a: ["href"] },
+    allowedAttributes: {
+      a: ["href"],
+      img: ["src", "srcset", "alt", "title", "width", "height", "loading"],
+    },
   };
 
   sanitizeTexts = () => {
     this.setState({ texts: sanitizeHtml(this.state.texts, this.specifyTags) });
   };
 
-  handleChangeClass = (e, item) => {
-    this.setState({ alignClass: item.class });
+  // change text alignment
+  handleChangeAlign = (e, item) => {
+    const align = item.class;
+    this.setState({ alignClass: align });
+    localStorage.setItem("text_alignment", JSON.stringify(align));
   };
 
+  // change font family
   handleChangeFamily = (e, item) => {
-    this.setState({ fontFamily: item.family });
+    const family = item.family;
+    this.setState({ fontFamily: family });
+    localStorage.setItem("text_family", JSON.stringify(family));
   };
+
+  // update state to local storage values when component mounts
+  updateStateOnload = () => {
+    let localEdit = JSON.parse(localStorage.getItem("text_edits"));
+    let localAlignment = JSON.parse(localStorage.getItem("text_alignment"));
+    let localFamily = JSON.parse(localStorage.getItem("text_family"));
+
+    this.setState({ alignClass: localAlignment });
+    this.setState({ fontFamily: localFamily });
+
+    if (localEdit) {
+      this.setState({ texts: localEdit });
+    } else {
+      this.setState({ texts: `<p>Start Editing...</p>` });
+    }
+  };
+
+  componentDidMount() {
+    this.updateStateOnload();
+  }
 
   render() {
     return (
-      <div>
+      <div className="editor-container">
         <ToolBar
-          changeClass={this.handleChangeClass}
+          changeAlign={this.handleChangeAlign}
           changeFamily={this.handleChangeFamily}
         />
 
-        <div
-          className={`text-area-container ${this.state.alignClass} ${this.state.fontFamily}`}
-        >
-          <ContentEditable
-            className="editable"
-            onChange={this.handleInputChange}
-            html={this.state.texts}
-            onBlur={this.sanitizeTexts}
-          />
+        <div className="editor-container-inner">
+          <div
+            className={`text-area-container ${this.state.alignClass} ${this.state.fontFamily}`}
+          >
+            <ContentEditable
+              className="editable"
+              onChange={this.handleInputChange}
+              html={this.state.texts}
+              onBlur={this.sanitizeTexts}
+            />
+          </div>
         </div>
       </div>
     );

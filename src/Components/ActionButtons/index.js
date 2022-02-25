@@ -5,16 +5,21 @@ import MenuItem from "@mui/material/MenuItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBold,
+  faParagraph,
   faUnderline,
   faItalic,
   faHeading,
   faAlignLeft,
   faAlignRight,
   faAlignCenter,
+  faLink,
+  faList,
+  faListNumeric,
+  faImage,
 } from "@fortawesome/free-solid-svg-icons";
 
 function ActionButtons(props) {
-  const { changeClass, changeFamily } = props;
+  const { changeAlign, changeFamily } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -27,12 +32,12 @@ function ActionButtons(props) {
 
   return (
     <Box borderLeft="1px solid gray" paddingLeft={2}>
-      {actionData.map((item) => (
+      {actionData.map((item, index) => (
         <button
-          key={item.icon}
+          key={index}
           className="actionBtn"
-          onMouseDown={(evt) => {
-            evt.preventDefault(); // Avoids loosing focus from the editable area
+          onMouseDown={(e) => {
+            e.preventDefault(); // Avoids loosing focus from the editable area
             document.execCommand(item.action, false);
           }}
         >
@@ -42,10 +47,10 @@ function ActionButtons(props) {
 
       {headingsData.map((item, index) => (
         <button
-          key={index}
+          key={item.name}
           className="actionBtn"
-          onMouseDown={(evt) => {
-            evt.preventDefault();
+          onMouseDown={(e) => {
+            e.preventDefault();
             document.execCommand(item.action, false, item.arg); // Sends the command to the browser
           }}
         >
@@ -63,12 +68,13 @@ function ActionButtons(props) {
         borderLeft="1px solid gray"
         paddingLeft={2}
         paddingRight={2}
+        className="align-box"
       >
-        {alignData.map((item) => (
+        {alignData.map((item, index) => (
           <button
-            key={item.icon}
+            key={index}
             className="actionBtn"
-            onClick={(e) => changeClass(e, item)}
+            onClick={(e) => changeAlign(e, item)}
           >
             <FontAwesomeIcon icon={item.icon} />
           </button>
@@ -86,6 +92,52 @@ function ActionButtons(props) {
         </button>
       </Box>
 
+      <Box
+        display="inline"
+        borderLeft="1px solid gray"
+        paddingLeft={2}
+        paddingRight={2}
+      >
+        <button
+          className="actionBtn"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            document.execCommand("createLink", false, " ");
+          }}
+        >
+          <FontAwesomeIcon icon={faLink} />
+        </button>
+
+        <button
+          className="actionBtn"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            document.execCommand("insertUnorderedList", false);
+          }}
+        >
+          <FontAwesomeIcon icon={faList} />
+        </button>
+
+        <button
+          className="actionBtn"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            document.execCommand("insertOrderedList", false);
+          }}
+        >
+          <FontAwesomeIcon icon={faListNumeric} />
+        </button>
+        <button
+          className="actionBtn"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            document.execCommand("insertImage", false, " ");
+          }}
+        >
+          <FontAwesomeIcon icon={faImage} />
+        </button>
+      </Box>
+
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -96,7 +148,7 @@ function ActionButtons(props) {
         }}
       >
         {fontFamilyData.map((item) => (
-          <MenuItem>
+          <MenuItem key={item.name}>
             <button
               className={`heading-btn ${item.family}`}
               onClick={(e) => changeFamily(e, item)}
@@ -122,6 +174,10 @@ const actionData = [
   {
     icon: faItalic,
     action: "italic",
+  },
+  {
+    icon: faParagraph,
+    action: "insertParagraph",
   },
 ];
 
