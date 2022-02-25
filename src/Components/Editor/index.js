@@ -9,6 +9,7 @@ class Editor extends React.Component {
     this.state = {
       texts: `<p>Start Editing</p>`,
       alignClass: "text-left",
+      fontFamily: "roboto",
     };
   }
 
@@ -42,15 +43,23 @@ class Editor extends React.Component {
     this.setState({ alignClass: item.class });
   };
 
+  handleChangeFamily = (e, item) => {
+    this.setState({ fontFamily: item.family });
+  };
+
   render() {
     return (
       <div>
-        <ToolBar changeClass={this.handleChangeClass} />
+        <ToolBar
+          changeClass={this.handleChangeClass}
+          changeFamily={this.handleChangeFamily}
+        />
 
-        <div className={`text-area-container ${this.state.alignClass}`}>
+        <div
+          className={`text-area-container ${this.state.alignClass} ${this.state.fontFamily}`}
+        >
           <ContentEditable
             className="editable"
-            tagName="pre"
             onChange={this.handleInputChange}
             html={this.state.texts}
             onBlur={this.sanitizeTexts}
