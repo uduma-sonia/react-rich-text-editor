@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function ActionButton(props) {
+  const { changeClass } = props;
   // const [anchorEl, setAnchorEl] = useState(null);
   // const open = Boolean(anchorEl);
 
@@ -41,13 +42,19 @@ function ActionButton(props) {
 
       {headingsData.map((item, index) => (
         <button
+          key={index}
           className="actionBtn"
           onMouseDown={(evt) => {
-            evt.preventDefault(); // Avoids loosing focus from the editable area
+            evt.preventDefault();
             document.execCommand(item.action, false, item.arg); // Send the command to the browser
           }}
         >
-          <FontAwesomeIcon icon={faHeading} /> {index + 1}
+          <FontAwesomeIcon icon={faHeading} />
+          <span
+            style={{ fontWeight: "500", fontSize: "12px", marginLeft: "2px" }}
+          >
+            {index + 1}
+          </span>
         </button>
       ))}
 
@@ -57,15 +64,15 @@ function ActionButton(props) {
         paddingLeft={2}
         paddingRight={2}
       >
-        <button className="actionBtn">
-          <FontAwesomeIcon icon={faAlignLeft} />
-        </button>
-        <button className="actionBtn">
-          <FontAwesomeIcon icon={faAlignRight} />
-        </button>
-        <button className="actionBtn">
-          <FontAwesomeIcon icon={faAlignCenter} />
-        </button>
+        {alignData.map((item) => (
+          <button
+            key={item.icon}
+            className="actionBtn"
+            onClick={(e) => changeClass(e, item)}
+          >
+            <FontAwesomeIcon icon={item.icon} />
+          </button>
+        ))}
       </Box>
     </Box>
   );
@@ -101,6 +108,21 @@ const headingsData = [
     name: "Heading 3",
     action: "formatBlock",
     arg: "h3",
+  },
+];
+
+const alignData = [
+  {
+    icon: faAlignLeft,
+    class: "text-left",
+  },
+  {
+    icon: faAlignRight,
+    class: "text-right",
+  },
+  {
+    icon: faAlignCenter,
+    class: "text-center",
   },
 ];
 

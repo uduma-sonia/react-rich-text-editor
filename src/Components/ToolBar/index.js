@@ -6,7 +6,9 @@ import Typography from "@mui/material/Typography";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-function ToolBar() {
+function ToolBar(props) {
+  const { changeClass } = props;
+
   return (
     <Box borderTop="1px solid #d1dede" borderBottom="1px solid #d1dede">
       <Stack
@@ -21,7 +23,7 @@ function ToolBar() {
 
         <Box flexGrow="1">
           <Box>
-            <ActionButton />
+            <ActionButton changeClass={changeClass} />
           </Box>
         </Box>
 

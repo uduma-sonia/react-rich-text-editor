@@ -11,7 +11,7 @@ function App() {
   const BootstrapButton = styled(Button)({
     boxShadow: "none",
     textTransform: "none",
-    fontSize: 14,
+    fontSize: "12px",
     padding: "6px 12px",
     border: "1px solid",
     lineHeight: 1.5,
@@ -58,5 +58,3 @@ function App() {
 }
 
 export default App;
-
-// #1b5e20

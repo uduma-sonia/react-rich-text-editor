@@ -13,6 +13,9 @@ body {
 .text-area-container {
   width: 800px;
   margin: 40px auto 0px;
+  border-left: 1px solid rgb(236, 235, 235);
+  border-right: 1px solid rgb(236, 235, 235);
+  padding: 0px 10px;
 }
 
 .editable {
@@ -33,7 +36,24 @@ body {
 }
 
 .actionBtn:hover {
-  background-color: rgb(230, 230, 230);
+  color: blue;
+}
+
+.heading-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
 }
 
 /* .editable {

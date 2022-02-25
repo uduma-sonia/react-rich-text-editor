@@ -7,7 +7,8 @@ class Editor extends React.Component {
   constructor() {
     super();
     this.state = {
-      texts: `<h3>Start Editing</h3>`,
+      texts: `<p>Start Editing</p>`,
+      alignClass: "text-left",
     };
   }
 
@@ -37,17 +38,21 @@ class Editor extends React.Component {
     this.setState({ texts: sanitizeHtml(this.state.texts, this.specifyTags) });
   };
 
+  handleChangeClass = (e, item) => {
+    this.setState({ alignClass: item.class });
+  };
+
   render() {
     return (
       <div>
-        <ToolBar />
+        <ToolBar changeClass={this.handleChangeClass} />
 
-        <div className="text-area-container">
+        <div className={`text-area-container ${this.state.alignClass}`}>
           <ContentEditable
             className="editable"
             tagName="pre"
             onChange={this.handleInputChange}
-            html={this.state.texts} // innerHTML of the editable div
+            html={this.state.texts}
             onBlur={this.sanitizeTexts}
           />
         </div>
@@ -57,3 +62,5 @@ class Editor extends React.Component {
 }
 
 export default Editor;
+
+// Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
