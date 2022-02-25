@@ -15,7 +15,6 @@ import {
   faLink,
   faList,
   faListNumeric,
-  faImage,
 } from "@fortawesome/free-solid-svg-icons";
 
 function ActionButtons(props) {
@@ -126,15 +125,6 @@ function ActionButtons(props) {
           }}
         >
           <FontAwesomeIcon icon={faListNumeric} />
-        </button>
-        <button
-          className="actionBtn"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            document.execCommand("insertImage", false, " ");
-          }}
-        >
-          <FontAwesomeIcon icon={faImage} />
         </button>
       </Box>
 
