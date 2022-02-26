@@ -15,6 +15,9 @@ import {
   faLink,
   faList,
   faListNumeric,
+  faRuler,
+  faUndo,
+  faRedo,
 } from "@fortawesome/free-solid-svg-icons";
 
 function ActionButtons(props) {
@@ -125,6 +128,33 @@ function ActionButtons(props) {
           }}
         >
           <FontAwesomeIcon icon={faListNumeric} />
+        </button>
+        <button
+          className="actionBtn"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            document.execCommand("insertHorizontalRule", false);
+          }}
+        >
+          <FontAwesomeIcon icon={faRuler} />
+        </button>
+        <button
+          className="actionBtn"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            document.execCommand("undo", false);
+          }}
+        >
+          <FontAwesomeIcon icon={faUndo} />
+        </button>
+        <button
+          className="actionBtn"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            document.execCommand("redo", false);
+          }}
+        >
+          <FontAwesomeIcon icon={faRedo} />
         </button>
       </Box>
 
