@@ -34,6 +34,9 @@ class Editor extends React.Component {
       "h4",
       "h5",
       "h6",
+      "ul",
+      "li",
+      "hr",
     ],
     allowedAttributes: {
       a: ["href"],

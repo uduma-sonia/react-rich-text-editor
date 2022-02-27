@@ -34,9 +34,9 @@ function ActionButtons(props) {
 
   return (
     <Box borderLeft="1px solid gray" paddingLeft={2}>
-      {actionData.map((item, index) => (
+      {actionData.map((item) => (
         <button
-          key={index}
+          key={item.action}
           className="actionBtn"
           onMouseDown={(e) => {
             e.preventDefault(); // Avoids loosing focus from the editable area
@@ -72,9 +72,9 @@ function ActionButtons(props) {
         paddingRight={2}
         className="align-box"
       >
-        {alignData.map((item, index) => (
+        {alignData.map((item) => (
           <button
-            key={index}
+            key={item.class}
             className="actionBtn"
             onClick={(e) => changeAlign(e, item)}
           >
@@ -100,62 +100,18 @@ function ActionButtons(props) {
         paddingLeft={2}
         paddingRight={2}
       >
-        <button
-          className="actionBtn"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            document.execCommand("createLink", false, " ");
-          }}
-        >
-          <FontAwesomeIcon icon={faLink} />
-        </button>
-
-        <button
-          className="actionBtn"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            document.execCommand("insertUnorderedList", false);
-          }}
-        >
-          <FontAwesomeIcon icon={faList} />
-        </button>
-
-        <button
-          className="actionBtn"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            document.execCommand("insertOrderedList", false);
-          }}
-        >
-          <FontAwesomeIcon icon={faListNumeric} />
-        </button>
-        <button
-          className="actionBtn"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            document.execCommand("insertHorizontalRule", false);
-          }}
-        >
-          <FontAwesomeIcon icon={faRuler} />
-        </button>
-        <button
-          className="actionBtn"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            document.execCommand("undo", false);
-          }}
-        >
-          <FontAwesomeIcon icon={faUndo} />
-        </button>
-        <button
-          className="actionBtn"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            document.execCommand("redo", false);
-          }}
-        >
-          <FontAwesomeIcon icon={faRedo} />
-        </button>
+        {action2Data.map((item) => (
+          <button
+            key={item.action}
+            className="actionBtn"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              document.execCommand(item.action, false, " ");
+            }}
+          >
+            <FontAwesomeIcon icon={item.icon} />
+          </button>
+        ))}
       </Box>
 
       <Menu
@@ -262,6 +218,33 @@ const fontFamilyData = [
   {
     name: "Haettenschweiler",
     family: "haettenschweiler",
+  },
+];
+
+const action2Data = [
+  {
+    icon: faLink,
+    action: "createLink",
+  },
+  {
+    icon: faList,
+    action: "insertUnorderedList",
+  },
+  {
+    icon: faListNumeric,
+    action: "insertOrderedList",
+  },
+  {
+    icon: faRuler,
+    action: "insertHorizontalRule",
+  },
+  {
+    icon: faUndo,
+    action: "undo",
+  },
+  {
+    icon: faRedo,
+    action: "redo",
   },
 ];
 
