@@ -18,6 +18,7 @@ import {
   faRuler,
   faUndo,
   faRedo,
+  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 function ActionButtons(props) {
@@ -91,6 +92,9 @@ function ActionButtons(props) {
       >
         <button className="font-family-btn" onClick={handleClick}>
           Font family
+          <Box as="span" ml="3px">
+            <FontAwesomeIcon fontSize={10} icon={faChevronDown} />
+          </Box>
         </button>
       </Box>
 
